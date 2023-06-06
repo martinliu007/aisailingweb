@@ -1,14 +1,8 @@
 <template>
-    <div v-for="article in info" v-bind:key="article.url" id="articles">
-        <router-link
-                :to="{ name: 'ArticleDetail', params: { id: article.id }}"
-                class="article-title"
-        >
-            {{ article.title }}
-        </router-link>
-        
+
+    <div v-for="article in info.results" v-bind:key="article.url" id="articles">
         <div>
-            <span
+            <span 
                   v-for="tag in article.tags" 
                   v-bind:key="tag" 
                   class="tag"
@@ -16,19 +10,18 @@
                 {{ tag }}
             </span>
         </div>
-        <!-- <div class="article-title">
+        <div class="article-title">
             {{ article.title }}
-        </div> -->
+        </div>
         <div>{{ formatted_time(article.created) }}</div>
     </div>
-
 </template>
 
 <script>
     import axios from 'axios';
 
     export default {
-        name: 'ArticleList',
+        name: 'App',
         data: function () {
             return {
                 info: ''
@@ -46,11 +39,9 @@
             }
         }
     }
-
 </script>
 
-<!-- "scoped" 使样式仅在当前组件生效 -->
-<style scoped>
+<style>
     #articles {
         padding: 10px;
     }
@@ -62,7 +53,6 @@
         text-decoration: none;
         padding: 5px 0 5px 0;
     }
-
     .tag {
         padding: 2px 5px 2px 5px;
         margin: 5px 5px 5px 0;
